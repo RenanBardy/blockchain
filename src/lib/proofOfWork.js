@@ -11,8 +11,8 @@ module.exports = function getProofOfWork (lastProof) {
 }
 
 function isValid (lastProof, proof) {
-  // to be valid the hash must have four 0 at the end
+  // to be valid the hash must have five 0 at the end
   const newHash = hash.generate(`${lastProof}${proof}`)
   
-  return newHash.split('').slice(-4).reduce((curr, next) => curr && next == '0' , true)
+  return !newHash.split('').slice(-5).some(s => s !== '0')
 }
